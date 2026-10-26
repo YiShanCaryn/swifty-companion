@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TextInput, 
-    Pressable, Keyboard, TouchableWithoutFeedback } from 'react-native'
+    Pressable, ScrollView} from 'react-native'
 import { Link, useRouter } from 'expo-router'
 import { useState } from 'react'
 
@@ -8,23 +8,33 @@ import Logo from '../assets/img/42.png'
 const Home = () => {  
   
     const [login, setLogin] = useState('')
+    const [error, setError] = useState('')
     const router = useRouter()
 
     const handleSearch = () => {
         const studentLogin = login.trim()
         if (studentLogin === '') {
+            setError('Please enter a 42 login')
             return
         }
-        Keyboard.dismiss()
+        setError('')
+        setLogin('')
         router.push({
             pathname: '/profile',
             params: { login: studentLogin }
         })
     }
 
+    const handleInputChange = (text) => {
+        setLogin(text)
+        if (error) setError('')
+    }
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
-        <View style={styles.innerContainer}>
+    <View style={styles.container}>
+        <ScrollView
+        contentContainerStyle={styles.innerContainer}
+        keyboardShouldPersistTaps="handled">
 
             <Image source={Logo} style={styles.img} resizeMode="contain"/>
 
@@ -33,8 +43,9 @@ const Home = () => {
             <Text style={styles.subtitle}>Find a 42 Student</Text>
 
             <View style={styles.searchContainer}>
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, error ? styles.inputError : null]}
                         placeholder="Enter a 42 login"
                         placeholderTextColor="#888"
                         value={login}
@@ -57,10 +68,10 @@ const Home = () => {
 
             <Text style={styles.description}>Enter a student's 42 login to view their profile.</Text>
 
-            <Link href="/profile" style={styles.link}>Student Profile Page</Link>
+            <Link href="https://42lausanne.ch/fr" style={styles.link}>42 Website</Link>
 
-        </View>
-    </TouchableWithoutFeedback>
+        </ScrollView>
+    </View>
   )
 }
 
@@ -77,6 +88,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         paddingHorizontal: 24,
         paddingTop: 100,
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 14,
+        marginBottom: 8,
+        textAlign: 'center'
+    },
+    inputError: {
+        borderColor: 'red'
     },
 
     img: {
