@@ -14,7 +14,7 @@ const Home = () => {
     const handleSearch = () => {
         const studentLogin = login.trim()
         if (studentLogin === '') {
-            setError('Please enter a 42 login')
+            setError('A student login is required.')
             return
         }
         setError('')
@@ -25,11 +25,6 @@ const Home = () => {
         })
     }
 
-    const handleInputChange = (text) => {
-        setLogin(text)
-        if (error) setError('')
-    }
-
   return (
     <View style={styles.container}>
         <ScrollView
@@ -38,9 +33,13 @@ const Home = () => {
 
             <Image source={Logo} style={styles.img} resizeMode="contain"/>
 
-            <Text style={styles.title}>SWIFTY COMPANION</Text>
+            <Text style={styles.title}>
+                SWIFTY COMPANION
+            </Text>
 
-            <Text style={styles.subtitle}>Find a 42 Student</Text>
+            <Text style={styles.subtitle}>
+                Find a 42 Student
+            </Text>
 
             <View style={styles.searchContainer}>
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -62,13 +61,19 @@ const Home = () => {
                         onPress={handleSearch}
                         accessibilityRole="button"
                     >
-                        <Text style={styles.buttonText}>Search</Text>
+                        <Text style={styles.buttonText}>
+                            Search
+                        </Text>
                     </Pressable>
                 </View>
 
-            <Text style={styles.description}>Enter a student's 42 login to view their profile.</Text>
+            <Text style={styles.description}>
+                Enter a student's 42 login to view their profile.
+            </Text>
 
-            <Link href="https://42lausanne.ch/fr" style={styles.link}>42 Website</Link>
+            <Link href="https://42lausanne.ch/fr" style={styles.link}>
+                42 Website
+            </Link>
 
         </ScrollView>
     </View>
