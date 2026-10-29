@@ -1,23 +1,23 @@
 export const Colors = {
-  primary: "#6849a7",
-  warning: "#cc475a",
-  
-  dark: {
-    text: "#d4d4d4",
-    title: "#fff",
-    background: "#252231",
-    navBackground: "#201e2b",
-    iconColor: "#9591a5",
-    iconColorFocused: "#fff",
-    uiBackground: "#2f2b3d",
-  },
+  primary: "#00BABC",
+  secondary: "#6C5CE7",
+
+  success: "#20A779",
+  warning: "#F4A340",
+  error: "#E05260",
+
   light: {
-    text: "#625f72",
-    title: "#201e2b",
-    background: "#e0dfe8",
-    navBackground: "#e8e7ef",
-    iconColor: "#686477",
-    iconColorFocused: "#201e2b",
-    uiBackground: "#d6d5e1",
+    text: "#5F6072",
+    title: "#202033",
+    background: "#F7F7FC",
+    navBackground: "#FFFFFF",
+    iconColor: "#85859A",
+    iconColorFocused: "#6C5CE7",
+    uiBackground: "#EEEEF8",
+    cardBackground: "#FFFFFF",
+    border: "#E3E3EF",
+    inputBackground: "#FFFFFF",
+    placeholder: "#9999AD",
+    skillBackground: "#E7E6F3",
   },
-}
+};

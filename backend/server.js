@@ -58,6 +58,33 @@ const getAccessToken = async () => {
     return tokenRequest
 }
 
+app.get('/api/students/:login/image', async (req, res) => {
+    try {
+        const login = req.params.login.trim()
+        const accessToken = await getAccessToken()
+        const studentResponse = await axios.get(
+            `https://api.intra.42.fr/v2/users/${encodeURIComponent(login)}`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        )
+        const imageUrl = studentResponse.data.image?.versions?.medium || studentResponse.data.image?.link
+
+        if (!imageUrl) {
+            return res.sendStatus(404)
+        }
+
+        const imageResponse = await axios.get(imageUrl, {
+            responseType: 'arraybuffer',
+            headers: { Authorization: `Bearer ${accessToken}` }
+        })
+
+        res.set('Cross-Origin-Resource-Policy', 'cross-origin')
+        res.type(imageResponse.headers['content-type'] || 'image/jpeg').send(imageResponse.data)
+    } catch (error) {
+        console.error('Student image error:', error.response?.status || error.message)
+        res.sendStatus(error.response?.status === 404 ? 404 : 502)
+    }
+})
+
 app.get('/api/students/:login', async (req, res) => {
     try {
         const login = req.params.login.trim()
@@ -86,7 +113,7 @@ app.get('/api/students/:login', async (req, res) => {
             first_name: student.first_name,
             last_name: student.last_name,
             email: student.email,
-            image: student.image?.link,
+            image: student.image?.versions?.medium || student.image?.link || null,
             location: student.location,
             wallet: student.wallet,
             correction_point: student.correction_point,
