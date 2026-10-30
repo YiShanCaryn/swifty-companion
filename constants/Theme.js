@@ -218,6 +218,20 @@ export const Theme = {
       borderWidth: 2,
       borderColor: Colors.light.border,
     },
+    avatarFallback: {
+      width: 120,
+      height: 120,
+      borderRadius: 60,
+      marginBottom: 16,
+      backgroundColor: Colors.primary,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    avatarFallbackText: {
+      color: Colors.light.navBackground,
+      fontSize: 32,
+      fontWeight: 'bold',
+    },
     profileError: {
       color: Colors.error,
       textAlign: 'center',
