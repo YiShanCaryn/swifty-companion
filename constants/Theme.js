@@ -53,10 +53,14 @@ export const Theme = {
     },
     homeContent: {
       flex: 1,
+      width: '100%',
+      maxWidth: 560,
+      alignSelf: 'center',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      paddingHorizontal: 24,
+      paddingHorizontal: 20,
       paddingTop: 100,
+      paddingBottom: 32,
     },
     homeErrorText: {
       color: Colors.error,
@@ -123,10 +127,14 @@ export const Theme = {
       borderBottomColor: Colors.primary,
     },
     profileContainer: {
+      width: '100%',
+      maxWidth: 720,
+      alignSelf: 'center',
       backgroundColor: Colors.light.background,
       alignItems: 'center',
-      padding: 24,
+      paddingHorizontal: 20,
       paddingTop: 60,
+      paddingBottom: 32,
     },
     profileScrollView: {
       flex: 1,
@@ -141,6 +149,7 @@ export const Theme = {
     },
     profileDetails: {
       width: '100%',
+      maxWidth: 560,
       alignItems: 'center',
       marginBottom: 24,
     },
@@ -158,6 +167,7 @@ export const Theme = {
     },
     projectsSection: {
       width: '100%',
+      maxWidth: 640,
       marginBottom: 24,
     },
     projectsTitle: {
@@ -214,6 +224,7 @@ export const Theme = {
     },
     skillsSection: {
       width: '100%',
+      maxWidth: 640,
       alignItems: 'center',
       marginBottom: 24,
     },
@@ -225,7 +236,8 @@ export const Theme = {
       textAlign: 'center',
     },
     skillItem: {
-      width: '90%',
+      width: '100%',
+      maxWidth: 560,
       alignItems: 'center',
       marginBottom: 12,
     },
