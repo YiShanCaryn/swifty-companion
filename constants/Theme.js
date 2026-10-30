@@ -123,11 +123,14 @@ export const Theme = {
       borderBottomColor: Colors.primary,
     },
     profileContainer: {
-      flex: 1,
       backgroundColor: Colors.light.background,
       alignItems: 'center',
       padding: 24,
       paddingTop: 60,
+    },
+    profileScrollView: {
+      flex: 1,
+      backgroundColor: Colors.light.background,
     },
     profileTitle: {
       color: Colors.light.title,
@@ -152,6 +155,50 @@ export const Theme = {
       fontSize: 16,
       marginVertical: 4,
       textAlign: 'center',
+    },
+    projectsSection: {
+      width: '100%',
+      marginBottom: 24,
+    },
+    projectsTitle: {
+      color: Colors.light.title,
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 12,
+      textAlign: 'center',
+    },
+    projectItem: {
+      width: '100%',
+      backgroundColor: Colors.light.cardBackground,
+      borderColor: Colors.light.border,
+      borderWidth: 1,
+      borderRadius: 8,
+      marginBottom: 8,
+      padding: 12,
+    },
+    projectName: {
+      color: Colors.light.title,
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 4,
+    },
+    projectInfo: {
+      color: Colors.light.text,
+      fontSize: 14,
+      marginBottom: 4,
+    },
+    projectStatus: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+    projectStatusPassed: {
+      color: Colors.success,
+    },
+    projectStatusFailed: {
+      color: Colors.error,
+    },
+    projectStatusPending: {
+      color: Colors.warning,
     },
     avatar: {
       width: 120,

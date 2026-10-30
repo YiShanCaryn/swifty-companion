@@ -117,7 +117,8 @@ app.get('/api/students/:login', async (req, res) => {
             location: student.location,
             wallet: student.wallet,
             correction_point: student.correction_point,
-            cursus_users: student.cursus_users
+            cursus_users: student.cursus_users,
+            projects_users: student.projects_users || []
         })
     } catch (error) {
         console.error(

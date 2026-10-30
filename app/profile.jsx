@@ -1,9 +1,13 @@
-import { View, Text, Image, ActivityIndicator, Platform } from 'react-native'
+import { View, Text, ActivityIndicator, Platform, ScrollView } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import Constants from 'expo-constants'
 import { Theme } from '../constants/Theme'
-import Logo from '../assets/img/42.png'
+
+import ProfileHeader from '../components/profile/ProfileHeader'
+import StudentOverview from '../components/profile/StudentOverview'
+import SkillsSection from '../components/profile/SkillsSection'
+import ProjectsSection from '../components/profile/ProjectsSection'
 
 const getApiBaseUrl = () => {
     if (Platform.OS === 'web') {
@@ -23,7 +27,6 @@ const Profile = () => {
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [imageFailed, setImageFailed] = useState(false)
 
   useEffect(() => {
       const fetchStudent = async () => {
@@ -40,7 +43,6 @@ const Profile = () => {
               setLoading(true)
               setError('')
               setStudent(null)
-              setImageFailed(false)
 
               const response = await fetch(
                   `${getApiBaseUrl()}/api/students/${encodeURIComponent(login.trim())}`,
@@ -71,6 +73,7 @@ const Profile = () => {
                 ...data,
                 level: mainCursus?.level || data.level,
                 skills: skills,
+                projects: data.projects_users || [],
                 evaluations: data.correction_point || 0,
                 phone: data.phone === 'hidden' ? null : data.phone,
                 mobile: data.phone === 'hidden' ? null : data.phone
@@ -110,48 +113,18 @@ const Profile = () => {
   }
   
   return (
-    <View style={Theme.styles.profileContainer}>
-      <Image
-        source={
-          imageFailed || !student.image
-            ? Logo
-            : { uri: `${getApiBaseUrl()}/api/students/${encodeURIComponent(login.trim())}/image` }
-        }
-        style={Theme.styles.avatar}
-        onError={() => setImageFailed(true)}
+    <ScrollView
+      style={Theme.styles.profileScrollView}
+      contentContainerStyle={Theme.styles.profileContainer}
+    >
+      <ProfileHeader
+        student={student}
+        imageUri={`${getApiBaseUrl()}/api/students/${encodeURIComponent(login.trim())}/image`}
       />
-
-      <Text style={Theme.styles.profileTitle}>
-        {student.first_name} {student.last_name}
-      </Text>
-
-      <View style={Theme.styles.profileDetails}>
-        <Text style={Theme.styles.profileLogin}>Login: {student.login}</Text>
-        <Text style={Theme.styles.profileInfo}>Email: {student.email || 'Not available'}</Text>
-        <Text style={Theme.styles.profileInfo}>Mobile: {student.phone || student.mobile || 'Not available'}</Text>
-        <Text style={Theme.styles.profileInfo}>Level: {student.level || 'Not available'}</Text>
-        <Text style={Theme.styles.profileInfo}>Location: {student.location || 'Unavailable'}</Text>
-        <Text style={Theme.styles.profileInfo}>Wallet: {student.wallet}</Text>
-        <Text style={Theme.styles.profileInfo}>Evaluations: {student.evaluations || student.correction_point || 0}</Text>
-      </View>
-
-      {student.skills && student.skills.length > 0 && (
-        <View style={Theme.styles.skillsSection}>
-          <Text style={Theme.styles.skillsTitle}>Skills</Text>
-          {student.skills.map((skill, index) => (
-            <View key={index} style={Theme.styles.skillItem}>
-              <Text style={Theme.styles.skillName}>{skill.name}</Text>
-              <View style={Theme.styles.skillBarContainer}>
-                <View style={[Theme.styles.skillBar, { width: `${skill.percentage || 0}%` }]} />
-                <Text style={Theme.styles.skillText}>
-                  Level {skill.level} - {skill.percentage || 0}%
-                </Text>
-              </View>
-            </View>
-          ))}
-        </View>
-      )}
-    </View>
+      <StudentOverview student={student} />
+      <SkillsSection skills={student.skills} />
+      <ProjectsSection projects={student.projects} />
+    </ScrollView>
   )
 }
 
