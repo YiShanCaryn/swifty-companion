@@ -74,9 +74,7 @@ const Profile = () => {
                 level: mainCursus?.level || data.level,
                 skills: skills,
                 projects: data.projects_users || [],
-                evaluations: data.correction_point || 0,
-                phone: data.phone === 'hidden' ? null : data.phone,
-                mobile: data.phone === 'hidden' ? null : data.phone
+                evaluations: data.correction_point || 0
               }
               
               setStudent(transformedData)

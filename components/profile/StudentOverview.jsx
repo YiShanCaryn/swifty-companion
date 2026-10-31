@@ -5,7 +5,6 @@ const StudentOverview = ({ student }) => (
   <View style={Theme.styles.profileDetails}>
     <Text style={Theme.styles.profileLogin}>Login: {student.login}</Text>
     <Text style={Theme.styles.profileInfo}>Email: {student.email || 'Not available'}</Text>
-    <Text style={Theme.styles.profileInfo}>Mobile: {student.phone || student.mobile || 'Not available'}</Text>
     <Text style={Theme.styles.profileInfo}>Level: {student.level || 'Not available'}</Text>
     <Text style={Theme.styles.profileInfo}>Location: {student.location || 'Unavailable'}</Text>
     <Text style={Theme.styles.profileInfo}>Wallet: {student.wallet}</Text>
